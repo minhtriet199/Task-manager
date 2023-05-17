@@ -1,0 +1,14 @@
+<div>
+    <table class="w-full border-collapse" >
+        <thead>
+          <tr class="text-left border-b border-gray-300" >
+            <th class="px-4 py-2"*ngFor="let Column of Columns">{{ Column }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-gray-300 hover:bg-gray-100" *ngFor="let item of ListDataSource">
+            <td class="px-4 py-2" *ngFor="let column of Columns">{{ item[column] }}</td>
+          </tr>
+        </tbody>
+    </table>
+</div>
