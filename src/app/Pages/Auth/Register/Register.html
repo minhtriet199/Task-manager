@@ -1,29 +1,79 @@
-<div class="min-h-screen flex items-center justify-center">
+<div class="min-h-screen flex justify-center">
     <div class="max-w-md w-full mx-auto">
         <div class="bg-white rounded-lg shadow-lg px-8 pt-6 pb-8 mb-4">
-            <h1 class="text-2xl font-bold mb-6">Register</h1>
-            <form>
-                <div class="mb-4">
-                    <label class="block text-gray-700 font-bold mb-2" for="username">
-                        Username
-                    </label>
-                    <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Enter your username">
-                </div>
-                <div class="mb-6">
-                    <label class="block text-gray-700 font-bold mb-2" for="password">
-                        Password
-                    </label>
-                    <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Enter your password">
-                </div>
-                <div class="flex items-center justify-between">
-                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-                        Sign In
+            <h1 class="text-2xl font-bold mb-6">Đăng ký</h1>
+
+            <form (ngSubmit)="store()" #registerForm="ngForm">
+              <div class="mb-6">
+                <mat-form-field class="w-full">
+                  <mat-label>Email</mat-label>
+                  <input matInput
+                    type="text"
+                    [(ngModel)]="FormDataSource.Email"
+                    name="Email" required email>
+                    <mat-error>
+                      Bạn phải nhập Email
+                    </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="mb-6">
+                <mat-form-field class="w-full ">
+                  <mat-label>Tài khoản</mat-label>
+                  <input matInput
+                    type="text"
+                    [(ngModel)]="FormDataSource.UserName"
+                    name="UserName" required>
+                    <mat-error >
+                      Bạn phải nhập UserName
+                    </mat-error>
+                </mat-form-field>
+              </div>
+            
+              <div class="mb-6">
+                <mat-form-field class="w-full">
+                  <mat-label>Mật khẩu</mat-label>
+                  <input matInput
+                  [type]="hide ? 'password' : 'text'"
+                    [(ngModel)]="FormDataSource.Password"
+                    name="Password" required>
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                      <mat-icon class="mr-4">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
-                    <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
-                        Forgot Password?
-                    </a>
-                </div>
+                    <mat-error>
+                      Bạn phải nhập Mật khẩu
+                    </mat-error>
+                </mat-form-field>
+              </div>
+            
+              <div class="mb-6">
+                <mat-form-field class="w-full">
+                  <mat-label>Nhập lại mật khẩu</mat-label>
+                  <input matInput
+                    [type]="hide ? 'password' : 'text'"
+                    [(ngModel)]="FormDataSource.RePassword"
+                    name="RePassword" required>
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" >
+                      <mat-icon class="mr-4">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error>
+                      Bạn phải nhập lại Mật khẩu
+                    </mat-error>
+                </mat-form-field>
+              </div>
+            
+              <div class="flex items-center justify-between">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  [disabled]="!registerForm.form.valid"
+                  type="submit">
+                  Đăng ký
+                </button>
+            
+                <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" routerLink="/auth/reset">Quên mật khẩu?</a>
+              </div>
             </form>
+           
+            
         </div>
     </div>
 </div>

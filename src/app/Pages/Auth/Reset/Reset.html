@@ -1,0 +1,32 @@
+<div class="min-h-screen flex justify-center">
+    <div class="max-w-md w-full mx-auto">
+        <div class="bg-white rounded-lg shadow-lg px-8 pt-6 pb-8 mb-4">
+            <h1 class="text-2xl font-bold mb-6">Quên mật khẩu</h1>
+            <form (ngSubmit)="store()" #loginForm="ngForm">
+
+              <div class="mb-6">
+                <mat-form-field class="w-full">
+                  <mat-label>Email</mat-label>
+                  <input matInput
+                    type="text"
+                    [(ngModel)]="FormDataSource.Email"
+                    name="Email" required email>
+                    <mat-error>
+                      Bạn phải nhập Email
+                    </mat-error>
+                </mat-form-field>
+              </div>
+
+              
+              <div class="flex items-center justify-between">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    [disabled]="!loginForm.form.valid"
+                    type="submit">
+                  Tiếp theo
+                </button>
+              </div>
+            </form>
+              
+        </div>
+    </div>
+</div>

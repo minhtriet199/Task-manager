@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable  } from '@angular/core';
 import { Configuration, DataResult, LoginDataResult } from '../Storage/Helper';
 
@@ -13,8 +13,13 @@ export class ApiServicesService {
     return this.http.get<DataResult>(this.configuration.Base_URL+url,{headers:this.RequestHeader()});
   }
 
+  public RequestGet(url:string,data:any){
+    const queryParams = new HttpParams({ fromObject: data });
+    return this.http.get<DataResult>(this.configuration.Base_URL+url, { params: queryParams });
+  } 
+
   public RequestPost(url:string,data:any){
-    return this.http.post<LoginDataResult>(this.configuration.Base_URL+url, data);
+    return this.http.post<DataResult>(this.configuration.Base_URL+url, data);
   }
 
   public RequestHeader():HttpHeaders | { [header: string]: string | string[]; }{

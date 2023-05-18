@@ -1,37 +1,47 @@
-<div class="min-h-screen flex items-center justify-center">
+<div class="min-h-screen flex justify-center">
     <div class="max-w-md w-full mx-auto">
         <div class="bg-white rounded-lg shadow-lg px-8 pt-6 pb-8 mb-4">
             <h1 class="text-2xl font-bold mb-6">Login</h1>
-            <form (ngSubmit)="store()">
-                <div class="mb-4">
-                  <label class="block text-gray-700 font-bold mb-2" for="username">Username</label>
-                  <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                         id="username"
-                         type="text"
-                         placeholder="Enter your username"
-                         [(ngModel)]="FormDataSource.UserName"
-                         name="username">
-                </div>
-              
-                <div class="mb-6">
-                  <label class="block text-gray-700 font-bold mb-2" for="password">Password</label>
-                  <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                         id="password"
-                         type="password"
-                         placeholder="Enter your password"
-                         [(ngModel)]="FormDataSource.PassWord"
-                         name="password">
-                </div>
+            <form (ngSubmit)="store()" #loginForm="ngForm">
+              <div class="mb-6">
+                <mat-form-field class="w-full ">
+                  <mat-label>Tài khoản</mat-label>
+                  <input matInput
+                    type="text"
+                    [(ngModel)]="FormDataSource.UserName"
+                    name="UserName" required>
+                    <mat-error >
+                      Bạn phải nhập UserName
+                    </mat-error>
+                </mat-form-field>
+              </div>
+            
+              <div class="mb-6">
+                <mat-form-field class="w-full">
+                  <mat-label>Mật khẩu</mat-label>
+                  <input matInput
+                  [type]="hide ? 'password' : 'text'"
+                    [(ngModel)]="FormDataSource.PassWord"
+                    name="Password" required>
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                      <mat-icon class="mr-4">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error>
+                      Bạn phải nhập Mật khẩu
+                    </mat-error>
+                </mat-form-field>
+              </div>
               
                 <div class="flex items-center justify-between">
                   <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                          type="submit">
-                    Sign In
+                      [disabled]="!loginForm.form.valid"
+                      type="submit">
+                    Đăng nhập
                   </button>
               
-                  <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">Forgot Password?</a>
+                  <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" routerLink="/auth/reset">Forgot Password?</a>
                 </div>
-              </form>
+            </form>
               
         </div>
     </div>

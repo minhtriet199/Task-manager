@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { TemplateModule } from './Core/Component/Template.module';
 import { AuthRoutingModule } from './Pages/Auth/Auth-route.module';
 import { EmployeeRoutingModule } from './Pages/Employees/Employee-routing.module';
-import { AuthGuard } from './Core/Auth/AuthGuard';
 
 const routes: Routes = [
   {
