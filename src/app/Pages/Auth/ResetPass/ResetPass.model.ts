@@ -1,6 +1,6 @@
 export class ResetPassRequest{
-    token:string="";
+    Token:string="";
+    UserID?:number;
     Password:string="";
     RePassWord:string="";
-    
 }

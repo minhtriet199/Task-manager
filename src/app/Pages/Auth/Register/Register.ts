@@ -3,6 +3,7 @@ import { ApiServicesService } from 'src/app/Core/Services/api-services';
 import { RegisterRequest } from './Register.model';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { MessageServices } from 'src/app/Core/Services/Message-services';
 @Component({
   selector: 'RegisterPage',
   templateUrl: './Register.html',
@@ -11,7 +12,7 @@ import Swal from 'sweetalert2';
 export class RegisterComponent implements OnInit {
   FormDataSource:RegisterRequest = new RegisterRequest();
   hide:boolean=true;
-  constructor(private apiRequest:ApiServicesService,private router: Router){}
+  constructor(private apiRequest:ApiServicesService,private router: Router,private Message: MessageServices){}
 
   ngOnInit(): void {
   }
@@ -19,11 +20,19 @@ export class RegisterComponent implements OnInit {
 
   public store() {
     if(this.FormDataSource.RePassword !=  this.FormDataSource.Password){
-      Swal.fire('Error', '2 Mật khẩu không trùng nhau', 'error');
+      this.Message.Error("Cảnh báo","2 Mật khẩu không trùng nhau");
       return;
     } 
     return this.apiRequest.RequestPost("Register", this.FormDataSource).subscribe(v => {
-      this.router.navigate(['/auth/login'], { queryParams: { username: v.Data.UserName } });
+      if(v.Result == 0){
+        this.router.navigate(['/auth/login'], { queryParams: { username: v.Data.UserName } });
+        this.Message.Success('Thành công',v.Message);
+        return;
+      }
+      else{
+        this.Message.Error("Cảnh báo",v.Message.replace(/\n/g, '<br>'));
+        return;
+      }
     });
   }
 }

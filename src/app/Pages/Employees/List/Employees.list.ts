@@ -18,12 +18,12 @@ export class EmployeesList implements OnInit {
   constructor(private apiRequest:ApiServicesService,private UserInfo:UserInfo){}
 
   ngOnInit(): void {
-    this.ColumnSettings = "Id,UserName,Password,CreatedDate,UpdatedDate";
+    this.ColumnSettings = "Id,UserName,Email,CreatedDate,UpdatedDate";
     this.getList();
   }
 
   public getList(){
-    return this.apiRequest.Request("api/User/Getlist").subscribe(v=>{
+    return this.apiRequest.RequestGet("api/User/Getlist").subscribe(v=>{
       this.ListDataSource = v.Data;
     })
   }

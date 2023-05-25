@@ -3,6 +3,8 @@ import { ApiServicesService } from 'src/app/Core/Services/api-services';
 import { LoginRequest } from './Login.model';
 import { AccessToken } from 'src/app/Core/Storage/Helper';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { MessageServices } from 'src/app/Core/Services/Message-services';
 
 
 @Component({
@@ -11,7 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./Login.css']
 })
 export class LoginComponent implements OnInit {
-  constructor(private apiRequest:ApiServicesService, private router: Router,private route: ActivatedRoute){}
+  constructor(private apiRequest:ApiServicesService, private router: Router,private route: ActivatedRoute,private Message: MessageServices){}
   FormDataSource:LoginRequest = new LoginRequest();
   hide:boolean=true;
   ngOnInit() {
@@ -25,14 +27,20 @@ export class LoginComponent implements OnInit {
  
   public store() {
     return this.apiRequest.RequestPost("Login", this.FormDataSource).subscribe(v => {
-      AccessToken.SetAccessToken(v.Data.Token);
-      AccessToken.SetUserInfo();
-      if (v.Data.Token) {
-        setTimeout(() => {
-          window.location.reload();
-        }, 100);
-      } else {
-        this.router.navigateByUrl('auth/login');
+      if(v.Result == 0){
+        AccessToken.SetAccessToken(v.Data.Token);
+        AccessToken.SetUserInfo();
+        if (v.Data.Token) {
+          setTimeout(() => {
+            window.location.reload();
+          }, 100);
+        } else {
+          this.router.navigateByUrl('auth/login');
+        }
+      }
+      else{
+        this.Message.Error('Cảnh báo!',v.Message);
+        return;
       }
     });
   }

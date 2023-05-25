@@ -2,7 +2,7 @@
 import jwtDecode from "jwt-decode";
 
 export interface DataResult {  
-    Message?: string;
+    Message: string;
     Data?: any;  
     Result: ResultMode;
     ErrorCode: number;
@@ -41,6 +41,7 @@ export class AccessToken{
             localStorage.setItem('userName', user.UserName);
             localStorage.setItem('userEmail', user.email);
             localStorage.setItem('expr', (Number(exprDate)).toString());
+            localStorage.setItem('role',user.role);
         }        
     }
 }
@@ -50,12 +51,14 @@ export class UserInfo{
     public readonly userName: string;
     public readonly userEmail: string;
     public readonly expr_Date: string;
+    public readonly role: number;
     
     constructor() {
         this.userName = localStorage.getItem('userName') || '';
         this.userID = localStorage.getItem('userID') || '';
         this.userEmail = localStorage.getItem('userEmail') || '';
         this.expr_Date = localStorage.getItem('expr') || '';
+        this.role = Number(localStorage.getItem('role')) || 1;
     }
 }
  export class getCurrentTime{

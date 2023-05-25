@@ -2,15 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../../Shared/Shared.services';
 
 @Component({
-  selector: 'SideBarTemplate',
-  templateUrl: './SideBarTemplate.html',
-  styleUrls: ['./SideBarTemplate.css']
+  selector: 'Drawer',
+  templateUrl: './Drawer.html',
+  styleUrls: ['./Drawer.css']
 })
-export class SideBarTemplate implements OnInit {
+export class Drawer implements OnInit {
   hidden:string="flex fixed flex-col h-screen transform -translate-x-full duration-300";
-  show:string="z-40 w-64 h-screen transition-transform  sm:translate-x-0 duration-300";
+  show:string="flex z-50 w-full fixed h-screen transition-transform duration-300";
   userName:string="";
-
   constructor(private sharedService: SharedService){}
 
   ngOnInit(): void {
@@ -22,5 +21,8 @@ export class SideBarTemplate implements OnInit {
     const sidebarOpen = this.sharedService.getSidebarOpen();
     this.sharedService.setSidebarOpen(false);
   }
-
+  toggleSidebar(): void {
+    const sidebarOpen = this.sharedService.getSidebarOpen();
+    this.sharedService.setSidebarOpen(!sidebarOpen);
+  }
 }

@@ -4,5 +4,4 @@ export class RegisterRequest{
     RePassword?:string;
     Email?:string;
     Phone?:string;
-    
 }

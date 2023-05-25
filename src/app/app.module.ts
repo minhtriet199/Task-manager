@@ -9,7 +9,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TemplateModule } from './Core/Component/Template.module';
 import { SharedService } from './Core/Shared/Shared.services';
 
-
 @NgModule({
   declarations: [
     AppComponent,

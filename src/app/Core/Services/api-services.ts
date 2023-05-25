@@ -9,13 +9,9 @@ export class ApiServicesService {
 
   constructor(private http:HttpClient,private configuration:Configuration) { }
 
-  public Request(url:string){
-    return this.http.get<DataResult>(this.configuration.Base_URL+url,{headers:this.RequestHeader()});
-  }
-
-  public RequestGet(url:string,data:any){
-    const queryParams = new HttpParams({ fromObject: data });
-    return this.http.get<DataResult>(this.configuration.Base_URL+url, { params: queryParams });
+  public RequestGet(url:string,data?:any){
+    const queryParams = data ? new HttpParams({ fromObject: data }) : undefined;
+    return this.http.get<DataResult>(this.configuration.Base_URL+url, {params: queryParams,headers:this.RequestHeader() });
   } 
 
   public RequestPost(url:string,data:any){

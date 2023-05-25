@@ -5,11 +5,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import { SideBarTemplate } from './SideBar/SideBarTemplate';
+import { Drawer } from './Drawer/Drawer';
 
 @NgModule({
     declarations: [
-        SideBarTemplate,
+        Drawer,
         NavigationBarTemplate,
         GridListTemplate,
     ],
@@ -20,7 +20,7 @@ import { SideBarTemplate } from './SideBar/SideBarTemplate';
         CommonModule,
     ],
     exports:[
-        SideBarTemplate,
+        Drawer,
         NavigationBarTemplate,
         GridListTemplate,
     ],
