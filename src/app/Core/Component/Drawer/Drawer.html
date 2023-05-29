@@ -1,35 +1,70 @@
 
 <div [ngClass]="isSidebarOpen() == true ? show : hidden" >
 
-  <div class=" w-1/5 bg-white h-screen">
+  <div class="drawer">
     <div class="flex items-center justify-center h-16 ">
-      <a routerLink="/" class="text-gray-900 font-bold">
+      <a routerLink="/" class="font-bold">
         <h1>My Website</h1>
       </a>
     </div>
 
     <div class="flex flex-col flex-grow">
-      <a routerLink="employee/list" class="flex items-center p-4 text-gray-700 hover:bg-gray-300" (click)="onChangeRoute()">
-        <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M12.707 9.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 11.586V3a1 1 0 012 0v8.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-        </svg>
-        <span class="font-medium">Employee</span>
+      <a routerLink="employee/list" class="drawer-Item" (click)="onChangeRoute()">
+        <div class="flex">
+          <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M12.707 9.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 11.586V3a1 1 0 012 0v8.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+          </svg>
+          <span class="font-medium">Employee</span>
+        </div>
       </a>
-      <a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-300" (click)="onChangeRoute()">
-        <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M3 2a1 1 0 00-1 1v14a1 1 0 001 1h14a1 1 0 001-1V3a1 1 0 00-1-1H3zm2 5h2v2H5V7zm0 4h2v2H5v-2zm0 4h2v2H5v-2zm4-8h6v10H9V7zm2 2v6h2V9h-2z" clip-rule="evenodd" />
-        </svg>
-        <span class="font-medium">Tasks</span>
+      <a href="#" class="drawer-Item" (click)="onChangeRoute()">
+        <div class="flex">
+          <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M3 2a1 1 0 00-1 1v14a1 1 0 001 1h14a1 1 0 001-1V3a1 1 0 00-1-1H3zm2 5h2v2H5V7zm0 4h2v2H5v-2zm0 4h2v2H5v-2zm4-8h6v10H9V7zm2 2v6h2V9h-2z" clip-rule="evenodd" />
+          </svg>
+          <span class="font-medium">Tasks</span>
+        </div>
       </a>
-      <a href="#" class="flex items-center p-4 text-gray-700 hover:bg-gray-300" (click)="onChangeRoute()">
-        <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-          <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-6a6 6 0 00-6 6c0 2.209 1.343 4.083 3.256 4.873l.485 1.94A.999.999 0 008 19h4a1 1 0 00.259-19.82l.485-1.94A6 6 0 0010 4z" clip-rule="evenodd" />
-        </svg>
-        <span class="font-medium">Project</span>
+      <a class="drawer-Item" (click)="ShowProject()">
+        <div class="flex">
+          <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-6a6 6 0 00-6 6c0 2.209 1.343 4.083 3.256 4.873l.485 1.94A.999.999 0 008 19h4a1 1 0 00.259-19.82l.485-1.94A6 6 0 0010 4z" clip-rule="evenodd" />
+          </svg>
+          <span class="font-medium">Project</span>
+        </div>
+       <div class="flex">
+          <span [ngClass]="{ 'Project-icon': ToggleProject, 'Project-icon2': !ToggleProject }">
+            <i class="fas fa-chevron-right"></i>
+          </span>
+       </div>
       </a>
     </div>
+    <hr class="text-white mx-6">
+
+    <div [ngClass]="{ 'Project-List-Show': ToggleProject, 'Project-List-Hide': !ToggleProject }" class="project-list-container">
+        <div class="Project-Tool">
+          <input type="text" placeholder="Tìm kiếm" class="Project-Search" [(ngModel)]="SearchQuery" (keyup.enter)="Getlist()">  
+          <a (click)="onChangeRoute()" class="text-base bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded-full cursor-pointer">+</a>
+
+        </div>
+        <div class="ListProjectContainer" *ngIf="ProjectNameList!= null">
+          <div *ngFor="let project of ProjectNameList">
+            <a href="Project/{{project.Id}}" (click)="onChangeRoute()" class="drawer-Item" >
+              <span>{{project.Name}}</span>
+            </a>
+          </div>
+        </div>
+        <div class="ListProjectContainer mx-8" *ngIf="ProjectNameList == null">
+          <h3>You Don't Have Any Project Now!</h3>
+        </div>
+    </div>
+    <a href="Project" (click)="onChangeRoute()" class="drawer-Item" >
+      <span class="underline">View All Project</span>
+    </a>
+
   </div>
+
   <div class=" flex-grow bg-black opacity-40 h-screen" (click)="toggleSidebar()">
   </div>
 </div>

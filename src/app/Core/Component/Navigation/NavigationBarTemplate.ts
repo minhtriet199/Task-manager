@@ -9,15 +9,13 @@ import { SharedService } from '../../Shared/Shared.services';
   styleUrls: ['./NavigationBarTemplate.css']
 })
 export class NavigationBarTemplate implements OnInit {
-  hidden:string="hidden absolute left-0 py-2 w-32";
-  show:string="absolute left-0 py-2 w-32";
   hover:boolean=false;
   userName:string="";
 
   constructor(private UserInfo:UserInfo,private router:Router,private sharedService: SharedService){}
 
-  ngOnInit(): void {
-    this.userName = this.UserInfo.userName? this.UserInfo.userName : "Login";  
+  ngOnInit(){
+    this.userName = this.UserInfo.userName? this.UserInfo.userName : "";  
   }
 
   onHover(){
@@ -31,7 +29,7 @@ export class NavigationBarTemplate implements OnInit {
     }, 100);
   }
 
-  toggleSidebar(): void {
+  toggleSidebar(){
     const sidebarOpen = this.sharedService.getSidebarOpen();
     this.sharedService.setSidebarOpen(!sidebarOpen);
   }

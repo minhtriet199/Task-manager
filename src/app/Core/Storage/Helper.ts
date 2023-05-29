@@ -39,9 +39,9 @@ export class AccessToken{
             const exprDate = new Date(data.Expires_in)
             localStorage.setItem('userID', user.Id);
             localStorage.setItem('userName', user.UserName);
-            localStorage.setItem('userEmail', user.email);
+            localStorage.setItem('userEmail', user.Email);
             localStorage.setItem('expr', (Number(exprDate)).toString());
-            localStorage.setItem('role',user.role);
+            localStorage.setItem('role',user.Role);
         }        
     }
 }
